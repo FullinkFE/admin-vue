@@ -91,7 +91,6 @@
         <a-card :bordered="false" class="sales" :style="{marginTop: '24px', minHeight: '509px'}">
           <template slot="title">
             <div class="title">销售额类别占比</div>
-            <!--@change="onChanelChange"-->
             <a-radio-group v-model="chanel">
               <a-radio-button value="a">全部渠道</a-radio-button>
               <a-radio-button value="b">线上</a-radio-button>
@@ -129,13 +128,14 @@ const hotSearchData = [
 ];
 
 @Component({
+  name: 'Analysis',
   components: {
     BarChart,
     HotSearch,
     Pie,
   },
 })
-export default class Dashboard extends Vue {
+export default class Analysis extends Vue {
   state = 'pedding';
   ranks = ranks;
   chanel = 'a';

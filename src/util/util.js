@@ -1,6 +1,6 @@
-export default class Util {
+export default {
   // 过滤一个对象中类型为字符串的，并且值为空的字段
-  static filterObjectStringEmpty(obj = {}) {
+  filterObjectStringEmpty: (obj = {}) => {
     const params = {};
     Object.entries(obj).forEach((item) => {
       let value = item[1];
@@ -13,5 +13,7 @@ export default class Util {
       params[key] = value;
     });
     return params;
-  }
-}
+  },
+};
+
+// @todo

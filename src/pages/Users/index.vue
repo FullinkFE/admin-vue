@@ -69,12 +69,12 @@
 <script>
 import { Vue, Component } from 'vue-property-decorator';
 import { observer } from 'mobx-vue';
-import UserService from '../../services/User';
-
-const us = new UserService();
+import userApi from '../../api/users';
 
 @observer
-@Component
+@Component({
+  name: 'Users',
+})
 export default class Users extends Vue {
   searchFormLayout = {
     labelCol: { span: 8 },
@@ -164,7 +164,7 @@ export default class Users extends Vue {
   }
 
   async mounted() {
-    const { list } = await us.getUsers();
+    const { list } = await userApi.getUsers();
     this.users = list;
   }
 }

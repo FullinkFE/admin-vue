@@ -1,7 +1,7 @@
 import axios from 'axios';
-import Util from './Util';
+import util from './util';
 import router from '../router';
-import Cookie from './Cookie';
+import Cookie from './cookie';
 
 const http = axios.create({
   timeout: 80000, //  超时时间
@@ -17,7 +17,7 @@ http.interceptors.request.use((conf) => {
   config.headers.token = Cookie.get('token');
   if (typeof config.params === 'object') {
     // 过滤一些类型为字符串 值为空的字段
-    config.params = Util.filterObjectStringEmpty(config.params);
+    config.params = util.filterObjectStringEmpty(config.params);
   }
   return config;
 });

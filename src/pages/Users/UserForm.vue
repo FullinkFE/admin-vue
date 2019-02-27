@@ -5,6 +5,7 @@ import { Form, Cascader } from 'ant-design-vue';
 
 Vue.component(Cascader.name, Cascader);
  @Component({
+   name: 'UserForm',
    props: {
      form: Object,
    },
@@ -34,7 +35,8 @@ class UserForm extends Vue {
         label: 'Zhong Hua Men',
       }],
     }],
-  }]
+  }];
+
   handleSubmit(e) {
     e.preventDefault();
     this.form.validateFieldsAndScroll((err) => {

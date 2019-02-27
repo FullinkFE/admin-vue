@@ -1,0 +1,75 @@
+[
+  {
+    "title": "实时监控",
+    "key": "dashboard",
+    "icon": "pie-chart",
+    "children": [
+      {
+        "title": "风控大盘",
+        "key": "analysis.dashboard",
+        "route": "/admin/dashboard/analysis"
+      }
+    ]
+  },
+  {
+    "title": "策略中心",
+    "key": "solution",
+    "icon": "area-chart",
+    "children": [
+      {
+        "title": "业务配置",
+        "key": "analysis.dashboard"
+      }
+    ]
+  },
+  {
+    "title": "管理中心",
+    "key": "management",
+    "icon": "sliders",
+    "children": [
+      {
+        "title": "产品管理",
+        "key": "products.management"
+      },
+      {
+        "title": "用户管理",
+        "key": "users.management",
+        "route": "/admin/users"
+      },
+      {
+        "title": "角色管理",
+        "key": "roles.management"
+      },
+      {
+        "title": "登录历史",
+        "key": "historys.management"
+      }
+    ]
+  },
+  {
+    "title": "模型管理",
+    "key": "model",
+    "icon": "box-plot",
+    "children": [
+      {
+        "title": "订单记录",
+        "key": "orders.model"
+      },
+      {
+        "title": "数据统计",
+        "key": "statics.model"
+      }
+    ]
+  },
+  {
+    "title": "数据中心",
+    "key": "data",
+    "icon": "found",
+    "children": [
+      {
+        "title": "风控报告",
+        "key": "reports.data"
+      }
+    ]
+  }
+]

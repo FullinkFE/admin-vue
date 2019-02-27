@@ -5,6 +5,10 @@ import { Vue, Component } from 'vue-property-decorator';
 import Viser from 'viser-vue';
 import App from './App';
 import router from './router';
+
+// ant.design 组建使用
+import './config/ant.design';
+
 // 注册路由钩子
 Component.registerHooks([
   'beforeRouteEnter',
@@ -14,6 +18,8 @@ Component.registerHooks([
 
 Vue.use(Viser);
 Vue.config.productionTip = false;
+
+console.log(router)
 
 /* eslint-disable no-new */
 new Vue({
