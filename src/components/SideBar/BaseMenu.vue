@@ -1,46 +1,53 @@
 <template>
   <a-menu
     :style="{ padding: '16px 0', width:'100%'}"
-    :defaultSelectedKeys="['1']"
-    :defaultOpenKeys="['sub1']"
-    :inlineCollapsed="true"
+    :defaultSelectedKeys="[]"
+    :defaultOpenKeys="[]"
+    :inlineCollapsed="collapsed"
     :openKeys="openKeys"
     :selectedKeys="selectedKeys"
-    @click="setCurrentPaths"
     @openChange="onpenChange"
     theme="dark"
-    mode="inline"
+    :mode="mode"
     >
-
-    <a-sub-menu :key="menu.key" v-for="menu in menus">
+    <a-sub-menu :key="menu.path" v-for="menu in menus">
       <span slot="title">
         <a-icon :type="menu.meta && menu.meta.icon" />
         <span>{{menu.meta && menu.meta.title}}</span>
       </span>
-      <a-menu-item :key="m.name" v-for="m in menu.children">
-        <router-link :to="m.path">{{m.meta && m.meta.title}}</router-link>
-      </a-menu-item>
+
+      <template class="1bc" v-for="m in menu.children">
+        <a-menu-item :key="m.path" v-if="!m.children">
+          <router-link :to="m.path">{{m.meta && m.meta.title}}</router-link>
+        </a-menu-item>
+
+        <a-sub-menu :key="m.path" v-if="m.children" :title="m.meta && m.meta.title">
+          <a-menu-item :key="m1.path" v-for="m1 in m.children">
+            <router-link :to="m1.path">{{m1.meta && m1.meta.title}}</router-link>
+          </a-menu-item>
+        </a-sub-menu>
+      </template>
     </a-sub-menu>
   </a-menu>
 </template>
 
 <script>
-import { Vue, Component, Inject, Watch } from 'vue-property-decorator';
+import { Vue, Component, Watch } from 'vue-property-decorator';
 import { observer } from 'mobx-vue';
 import menus from '../../config/router.config';
 
 @observer
 @Component({
+  name: 'BaseMenu',
   props: {
-    siderCollapsed: Boolean,
+    collapsed: Boolean,
   },
 })
 export default class BaseMenu extends Vue {
-  @Inject() store;
   selectedKeys = [];
   openKeys = [];
   cachedOpenKeys = [];
-  rootSubmenuKeys = ['sub1', 'sub2', 'sub3', 'sub4', 'sub5', 'sub6'];
+  mode = 'inline';
 
   get menus() {
     return menus.find(item => item.path === '/').children;
@@ -49,7 +56,7 @@ export default class BaseMenu extends Vue {
   // 监测左侧栏展开显示的一个标识符
   // 在关闭状态下讲过openkeys 设置为空数组
   // 以解决在左侧栏收缩的时候二级菜单会展示在页面上
-  @Watch('siderCollapsed')
+  @Watch('collapsed')
   onSideeCollapsedChange(val) {
     if (val) {
       this.cachedOpenKeys = this.openKeys;
@@ -71,35 +78,21 @@ export default class BaseMenu extends Vue {
     }
 
     const openKeys = [];
-  }
+    if (this.mode === 'inline') {
+      routes.forEach((item) => {
+        openKeys.push(item.path);
+      });
+    }
 
-  // 设置当前选中的那一个路由
-  setCurrentPaths({ key }) {
-    this.selectedKeys = [key];
-  }
-
-  // 获取到当前打开的那一层
-  getMenuSelectKeys() {
-    const { name } = this.$route;
-    const names = [...name.split('.')];
-    return {
-      openKeys: [names.pop()],
-      selectedKeys: [name],
-    };
+    if (this.collapsed) {
+      this.cachedOpenKeys = openKeys;
+    } else {
+      this.openKeys = openKeys;
+    }
   }
 
   onpenChange(openkeys) {
-    const latestOpenkey = openkeys.find(key => this.openKeys.indexOf(key) === -1);
-    if (this.rootSubmenuKeys.indexOf(latestOpenkey) === -1) {
-      this.openKeys = openkeys;
-    } else {
-      this.openKeys = latestOpenkey ? [latestOpenkey] : [];
-    }
-  }
-  mounted() {
-    const { openKeys, selectedKeys } = this.getMenuSelectKeys();
-    this.openKeys = openKeys || [];
-    this.selectedKeys = selectedKeys;
+    this.openKeys = openkeys;
   }
 }
 </script>

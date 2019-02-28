@@ -12,6 +12,7 @@ import {
   Col,
   Input,
   AutoComplete,
+  Popover,
   Select,
   Breadcrumb,
   Checkbox,
@@ -20,6 +21,8 @@ import {
   Icon,
   Spin,
   Avatar,
+  List,
+  Badge,
   Tabs,
   Tooltip,
   Dropdown,
@@ -28,16 +31,19 @@ import {
 
 Vue.use(Layout);
 Vue.use(Table);
+Vue.use(Badge);
 Vue.use(Tabs);
 Vue.use(Card);
 Vue.use(Breadcrumb);
 Vue.use(Row);
 Vue.use(Col);
 Vue.use(Menu);
+Vue.use(Popover);
 
 Vue.use(Form);
 Vue.use(Input);
 Vue.use(AutoComplete);
+Vue.use(List);
 Vue.use(Select);
 Vue.use(Checkbox);
 Vue.use(Radio);

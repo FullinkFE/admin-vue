@@ -1,8 +1,8 @@
 <template>
   <a-layout class="full-height" id="components-layout-demo-responsive">
-    <SideBar/>
+    <SideBar :collapsed="collapsed"/>
     <a-layout>
-      <page-basic-layout>
+      <page-basic-layout :collapsed.sync="collapsed">
         <router-view></router-view>
       </page-basic-layout>
     </a-layout>
@@ -11,7 +11,7 @@
 
 <script>
 import { Vue, Component } from 'vue-property-decorator';
-import SideBar from '../components/SiderMenu';
+import SideBar from '../components/SideBar';
 import PageBasicLayout from './PageBasicLayout';
 
 @Component({
@@ -22,6 +22,7 @@ import PageBasicLayout from './PageBasicLayout';
   },
 })
 export default class Layout extends Vue {
+  collapsed = false;
 }
 </script>
 

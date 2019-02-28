@@ -1,4 +1,5 @@
 const PageView = () => import('../layouts/PageView');
+const BlankLayout = () => import('../layouts/BlankLayout');
 
 export default [
   // 用户相关
@@ -35,13 +36,19 @@ export default [
         meta: { title: 'dashboard', keepAlive: true, icon: 'dashboard', permission: ['dashboard'] },
         children: [
           {
-            path: 'analysis',
+            path: '/dashboard/analysis',
             name: 'analysis',
             component: () => import('../pages/dashboard/Analysis'),
             meta: { pageHeader: true, keepAlive: true, title: '分析页' },
           },
           {
-            path: 'workplace',
+            path: '/dashboard/monitor',
+            name: 'monitor',
+            component: () => import('../pages/dashboard/Monitor'),
+            meta: { pageHeader: true, keepAlive: true, title: '监控页' },
+          },
+          {
+            path: '/dashboard/workplace',
             name: 'workplace',
             meta: { title: '工作台', keepAlive: true },
             component: () => import('../pages/dashboard/Analysis'),
@@ -52,18 +59,18 @@ export default [
       {
         path: '/form',
         name: 'form',
-        component: PageView,
+        component: BlankLayout,
         meta: { title: '表单页', icon: 'form' },
         children: [{
-          path: 'form/basic-form',
+          path: '/form/basic-form',
           name: 'basic-form',
           meta: { title: '基础表单', keepAlive: true },
         }, {
-          path: 'step-form',
+          path: '/form/step-form',
           name: 'step-form',
           meta: { title: '分步表单', keepAlive: true },
         }, {
-          path: 'advanced-form',
+          path: '/form/advanced-form',
           name: 'advanced-form',
           meta: { title: '基础表单', keepAlive: true },
         }],
@@ -72,41 +79,41 @@ export default [
       {
         path: '/list',
         name: 'list',
-        component: PageView,
+        component: BlankLayout,
         meta: { title: '列表页', keepAlive: true, icon: 'table' },
         children: [{
-          path: 'table-list',
+          path: '/list/table-list',
           name: 'table-list',
           component: PageView,
           meta: { title: '查询表格', keepAlive: true },
         }, {
-          path: 'basic-list',
+          path: '/form/basic-list',
           name: 'basic-list',
           component: PageView,
           meta: { title: '标准列表', keepAlive: true },
         }, {
-          path: 'card-list',
+          path: '/form/card-list',
           name: 'card-list',
           component: PageView,
           meta: { title: '卡片列表', keepAlive: true },
         }, {
-          path: 'search',
+          path: '/form/search',
           name: 'search',
           component: PageView,
-          meta: { title: '高级详情页', keepAlive: true },
+          meta: { title: '搜索列表', keepAlive: true },
           children: [
             {
-              path: 'articles',
+              path: '/form/search/articles',
               name: 'articles',
               component: PageView,
               meta: { title: '搜索列表（文章）', keepAlive: true },
             }, {
-              path: 'projects',
+              path: '/form/search/projects',
               name: 'projects',
               component: PageView,
               meta: { title: '搜索列表（项目）', keepAlive: true },
             }, {
-              path: 'applications',
+              path: '/form/search/applications',
               name: 'applications',
               component: PageView,
               meta: { title: '搜索列表（应用）', keepAlive: true },
@@ -121,12 +128,12 @@ export default [
         component: PageView,
         meta: { title: '详情页', icon: 'profile' },
         children: [{
-          path: 'basic',
+          path: '/profile/basic',
           name: 'basic',
           component: PageView,
           meta: { title: '基础详情页', keepAlive: true },
         }, {
-          path: 'advanced',
+          path: '/profile/advanced',
           name: 'advanced',
           component: PageView,
           meta: { title: '高级详情页', keepAlive: true },
@@ -139,12 +146,12 @@ export default [
         component: PageView,
         meta: { title: '结果页', keepAlive: true, icon: 'check-circle-o' },
         children: [{
-          path: 'success',
+          path: '/result/success',
           name: 'success',
           component: PageView,
           meta: { title: '成功页', keepAlive: true },
         }, {
-          path: 'fail',
+          path: '/result/fail',
           name: 'fail',
           component: PageView,
           meta: { title: '失败页', keepAlive: true },
@@ -156,17 +163,17 @@ export default [
         component: PageView,
         meta: { title: '异常页', icon: 'warning' },
         children: [{
-          path: '403',
+          path: '/exception/403',
           name: '403',
           component: PageView,
           meta: { title: '403', keepAlive: true },
         }, {
-          path: '404',
+          path: '/exception/404',
           name: '404',
           component: PageView,
           meta: { title: '404', keepAlive: true },
         }, {
-          path: '500',
+          path: '/exception/500',
           name: '500',
           component: PageView,
           meta: { title: '500', keepAlive: true },
@@ -178,12 +185,12 @@ export default [
         component: PageView,
         meta: { title: '个人页', icon: 'user' },
         children: [{
-          path: 'articles',
+          path: '/center/articles',
           name: 'articles',
           component: PageView,
           meta: { title: '个人中心', keepAlive: true },
         }, {
-          path: '/settings',
+          path: '/center/settings',
           name: 'settings',
           component: PageView,
           meta: { title: '个人设置' },

@@ -67,6 +67,7 @@ export default class Pie extends Vue {
 
   itemFormatter = (value) => {
     const item = sourceData.find(item2 => item2.item === value);
+    console.log(1)
     return (
       `<span class="legend-name">${item.item}</span>
      <span class="ant-divider ant-divider-vertical"></span>

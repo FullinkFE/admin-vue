@@ -1,23 +1,44 @@
 <template>
   <div class="page-header">
-    <div>
-      <a-breadcrumb class="page-header-breadcrumb">
-        <a-breadcrumb-item>Home</a-breadcrumb-item>
-        <a-breadcrumb-item><a href="">Application Center</a></a-breadcrumb-item>
-        <a-breadcrumb-item><a href="">Application List</a></a-breadcrumb-item>
-        <a-breadcrumb-item>An Application</a-breadcrumb-item>
-      </a-breadcrumb>
-    </div>
+    <a-breadcrumb class="page-header-breadcrumb">
+      <a-breadcrumb-item v-for="(item, index) in breadList" :key="index">
+        <router-link
+          v-if="item.name != name && index != 0"
+          :to="{ path: item.path === '' ? '/' : item.path }"
+        >{{ item.meta.title }}</router-link>
+        <span v-else>{{ item.meta.title }}</span>
+      </a-breadcrumb-item>
+    </a-breadcrumb>
+
+
   </div>
 </template>
 
 <script>
-import { Vue, Component } from 'vue-property-decorator';
+import { Vue, Component, Watch } from 'vue-property-decorator';
 
 @Component({
   name: 'PageHeader',
 })
 export default class PageHeader extends Vue {
+  breadList = [];
+  name = '';
+
+  @Watch('$route', { immediate: true, deep: true })
+  getBreadcrumb() {
+    this.breadList = [];
+    this.name = this.$route.name;
+    console.log(this.name)
+    this.$route.matched.forEach((item) => {
+      this.breadList.push(item);
+    });
+
+    console.log(this.breadList)
+  }
+
+  created() {
+    this.getBreadcrumb();
+  }
 }
 </script>
 
